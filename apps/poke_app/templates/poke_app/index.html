@@ -1,0 +1,38 @@
+<html>
+    <head>
+       <title>Pokes Page</title>
+       
+       
+    </head>
+    <body>
+        <h1>Welcome, {{user.name}}</h1><a href="/login/logout">Logout</a>
+        <h4>{{user.recieved.count}} people poked you!</h4>
+        
+        <div>
+            <ul style="list-style:none;">
+                
+                {% for pokes in poked %}<p>{{pokes.initiator.name}} poked you {{pokes.total}} times.</p>{% endfor %}
+            </ul>
+        </div>
+
+        {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        
+      
+        <h5>People you may want to poke:</h5>
+        <table>
+            <tr>
+                <th>Name</th><th>Alias</th><th>Email Address</th><th>Poke History</th><th>Action</th>
+            </tr>
+            {% for user in all %}
+            <tr>
+                <td>{{user.name}}</td><td>{{user.alias}}</td><td>{{user.email}}</td><td>{{user.recieved.count}}</td><td><a href="/poke/{{user.id}}">Poke</a></td>
+            </tr>{%endfor%}
+        </table>
+    </body>
+</html>
